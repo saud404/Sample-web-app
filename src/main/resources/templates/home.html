@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+{{^user}}
+<form action="/login" method="post">
+    <input type="text" placeholder="User Name" name="userName" required/>
+    <input type="password" placeholder="Password" name="password" required/>
+    <button type="submit">Login</button>
+</form>
+{{/user}}
+{{#user}}
+<a href="/">All</a>
+<a href="/?gener=adventure">Adventure</a>
+<a href="/?gener=rpg">RPG</a>
+<a href="/?gener=strategy">Strategy</a>
+<a href="/?gener=shooter">Shooter</a>
+<br>
+<form action="/" method="get">
+    <input type="number" name="releaseYear"/>
+    <button type="submit">Filter !</button>
+
+</form>
+<hr/>
+<br/>
+<form action="/" method="get">
+    <input type="text" placeholder="Search" name="search"/>
+    <button type="submit">Search !</button>
+
+</form>
+<hr>
+<br/>
+<form action="/add-games" method="post">
+    <input type="text" placeholder="Name" name="gameName"/>
+    <select name="gameGener">
+        <option selected disabled>Gener</option>
+        <option value="adventure">Adventure</option>
+        <option value="rpg">RPG</option>
+        <option value="strategy">Strategy</option>
+        <option value="shooter">Shooter</option>
+    </select>
+    <select name="gamePlatform">
+        <option selected disabled>Platform</option>
+        <option value="pc">PC</option>
+        <option value="rpg">PS4</option>
+        <option value="xbox">XBox</option>
+        <option value="wiiu">Wii U</option>
+    </select>
+    <input type="number" placeholder="Release Year" name="gameYear" />
+    <button type="submit">Add Game</button>
+</form>
+
+<ol>
+    {{#games}}
+    <li>{{name}}({{id}}) {{platform}} {{releaseYear}}</li>
+    {{/games}}
+</ol>
+{{/user}}
+</body>
+</html>
